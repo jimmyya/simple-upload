@@ -1,3 +1,4 @@
+//http://www.cnblogs.com/lvdabao/p/3498370.html
 jQuery.extend({
     createUploadIframe: function(id, uri)
 	{
