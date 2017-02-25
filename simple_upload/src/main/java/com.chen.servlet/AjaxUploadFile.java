@@ -17,6 +17,7 @@ import java.util.UUID;
 
 /**
  * Created by CHEN on 2016/8/10.
+ * 使用异步的方式提交文件
  */
 @WebServlet("/ajax_upload")
 public class AjaxUploadFile extends HttpServlet {
@@ -30,6 +31,7 @@ public class AjaxUploadFile extends HttpServlet {
         //磁盘文件项目工厂
         DiskFileItemFactory factory=new DiskFileItemFactory();
         //设置文件阀值，当文件超过5M的时候，产生临时文件并存储在临时的目录中
+        //防止内存爆满
         factory.setSizeThreshold(5*1024*1024);
         //设置缓存路径
         factory.setRepository(new File(req.getServletContext().getRealPath("/temp")));
