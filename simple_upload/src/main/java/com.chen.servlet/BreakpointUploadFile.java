@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * Created by CHEN on 2016/8/10.
+ * 断电续传
  */
 @WebServlet("/breakpoint/breakpoint_upload")
 public class BreakpointUploadFile extends HttpServlet{
@@ -45,18 +46,18 @@ public class BreakpointUploadFile extends HttpServlet{
             String filename="";
             for(FileItem item:list) {
                 if("".equals(filename)&&"filename".equals(item.getFieldName())) {
-                    filename=new String(item.getString().getBytes("iso-8859-1"),"utf-8");
+                    filename=new String(item.getString().getBytes("iso-8859-1"),"utf-8");//对文件名进行修改
                     break;
                 }
             }
             for(FileItem item:list) {
 
                 if(!item.isFormField()) {
-                    File file=new File(req.getServletContext().getRealPath("/file")+"/"+filename);
+                    File file=new File(req.getServletContext().getRealPath("/file")+"/"+filename);//对文件进行遍历找到目标文件
                     OutputStream out;
                     InputStream in = item.getInputStream() ;
                     if(file.exists()) {
-                        out=new FileOutputStream(file,true);
+                        out=new FileOutputStream(file,true);//true代表续写
                     }else {
                         out = new FileOutputStream(file);
                     }
